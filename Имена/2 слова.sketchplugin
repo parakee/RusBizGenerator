@@ -1,0 +1,18 @@
+#import 'names.js'
+
+for (var i = 0, l = [selection count]; i < l; i++) {
+	var layer = selection[i];
+
+	var randomGender = Math.floor(Math.random()+0.5);
+	var firstNames = namesParts[randomGender][1];
+	var lastNames = namesParts[randomGender][2];
+
+	var randomName = firstNames[ Math.floor(Math.random() * firstNames.length) ];
+		randomName += ' ' + lastNames[ Math.floor(Math.random() * lastNames.length) ];
+
+	[layer setStringValue: randomName];
+	[layer setName: randomName];
+}
+
+
+

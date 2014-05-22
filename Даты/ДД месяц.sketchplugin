@@ -1,0 +1,45 @@
+var namesMonth = ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
+var chageChance = 10; // коэффициет смены месяца. Чем больше, тем чаще меняются месяца. 1 - 30.
+var zeroChance = 10; // как часто дата будет повторяться.
+var today = new Date();
+var todayYear = today.getFullYear();
+var j = 12 - today.getMonth(); // Начинаем с текущего месяца
+var jFlag = -1;
+var actualNum = 0;
+var prevNum = 0;
+zeroChance = -zeroChance;
+
+for (var i = 0, l = [selection count]; i < l; i++) {
+	var layer = selection[i];
+	var dayNum = "";
+
+	if (j == 11) { j = 0; todayYear -= 1; } 		//если дошли до января, перемещаемся на декабрь и уменьшаем год
+	
+	if (j == jFlag) { 										//если j (месяц) такое же, как в прошлый раз
+		var randomFlag = Math.floor(Math.random() * (chageChance - zeroChance +1)) + zeroChance;
+		if (randomFlag < 0) {randomFlag = 0;}
+		actualNum = prevNum - randomFlag;
+		if (actualNum > 0) {	
+			dayNum = actualNum + dayNum;
+			prevNum = actualNum;
+		} else {
+			prevNum = Math.floor(Math.random() * 11) + 20;
+			dayNum = prevNum + dayNum;
+			j++;
+		}
+		jFlag = j;
+	} else { 										// если месяц изменился, все норм, берем произвольное число от 1 до 10
+		jFlag = j;
+		var prevNum = Math.floor(Math.random() * 11) + 20;
+		dayNum = prevNum + dayNum;
+	}
+
+	dayNum += " " + namesMonth[11 - j];
+
+
+	[layer setStringValue: dayNum];
+	[layer setName: dayNum];
+}
+
+
+

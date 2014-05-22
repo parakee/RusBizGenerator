@@ -1,0 +1,15 @@
+#import 'names.js'
+
+
+for (var i = 0, l = [selection count]; i < l; i++) {
+	var layer = selection[i];
+
+	var randomOrg = Math.floor(Math.random() * namesOrg.length);
+	var orgNames = namesOrg[randomOrg];
+
+	[layer setStringValue: orgNames];
+	[layer setName: orgNames];
+}
+
+
+

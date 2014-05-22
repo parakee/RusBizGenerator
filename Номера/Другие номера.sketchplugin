@@ -1,0 +1,60 @@
+// Show dialog
+ var basename = [doc askForUserInput:'Введите число цифр или имя. Например: ИННФЛ' initialValue:'Число цифр или аббревиатура'].toString();
+ var x = 0;
+ var avResult = "";
+ var resultNum = "";
+ var flagContent;
+
+  
+ 
+var huj = parseInt(basename);
+if (!isNaN(huj)) {
+	x = basename; 
+} else { //Если введено не число
+
+	if ((basename == "ИНН") || (basename == "инн")) { x = 10; } else
+	if ((basename == "ИННФЛ") || (basename == "иннфл")) { x = 12; } else
+	if ((basename == "КПП") || (basename == "кпп")) { x = 9; flagContent = 1; } else
+	if ((basename == "ОГРН") || (basename == "огрн")) { x = 13; } else
+	if ((basename == "ОГРНИП") || (basename == "огрнип")) { x = 15; } else
+	if ((basename == "ОКАТО") || (basename == "окато")) { x = 11; } else
+	if ((basename == "ОКТМО") || (basename == "октмо")) { x = 11; } else
+	if ((basename == "ОКПО") || (basename == "окпо")) { x = 10; flagContent = 0; } else
+	if ((basename == "РС") || (basename == "рс") || (basename == "р/с") || (basename == "Р/С")) { x = 20; } else
+	if ((basename == "БИК") || (basename == "бик")) { x = 9; flagContent = 0; } else
+	if ((basename == "КС") || (basename == "кс") || (basename == "к/с") || (basename == "К/С")) { x = 20; } 
+	else { x = 0; } 
+
+}
+
+for (var i = 0, l = [selection count]; i < l; i++) {
+	var layer = selection[i];
+	var resultNum = ""; 
+
+	if (flagContent == 0) {  // Правило для БИК и ОКПО, они начинаются с 0
+		resultNum += 0;
+	} else {
+		resultNum += Math.floor(Math.random() * 9) + 1;  // остальные начинаются не с 0
+	}
+
+
+
+	for (var j = 0; j < (x - 1); j++) {
+		if (flagContent == 1 && j == 4) { resultNum += "01001"; j = x - 1;} // если это КПП, добавляем 01001 и заканчиваем
+		else {
+			var randomDigit = Math.floor(Math.random() * 10);
+			resultNum += randomDigit;
+		}
+
+	}
+
+	if (x == 0) { resultNum = "Хотелось_бы_число"; } 
+	if (x < 0) { resultNum = avResult; } 
+
+	[layer setStringValue: resultNum];
+	[layer setName: resultNum];
+}		
+
+
+
+
