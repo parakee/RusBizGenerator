@@ -16,7 +16,9 @@ Russian business information generator — plugin for [Sketch](http://www.bohemi
 
 4. Названия организаций.
 
-@version: *0.2*
+5. Денежные суммы в формате dd ddd ddd,dd.
+
+@version: *0.3*
 
 
 ## Installation
