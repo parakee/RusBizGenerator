@@ -18,6 +18,8 @@ Russian business information generator — plugin for [Sketch](http://www.bohemi
 
 5. Денежные суммы в формате dd ddd ddd,dd.
 
+6. Цифры по маске. Звездочки заменятся цифрами, остальное останется. Напроимер, +7 9** ***-**-**
+
 @version: *0.3*
 
 
