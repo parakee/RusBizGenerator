@@ -6,7 +6,7 @@ for (var i = 0, l = [selection count]; i < l; i++) {
 	innUl += Math.floor(Math.random() * 9)+1;
 
 
-	for (var j = 0; j < 8; j++) {
+	for (var j = 0; j < 9; j++) {
 		var randomDigit = Math.floor(Math.random() * 10);
 		innUl += randomDigit;
 		if (j == 2) { kppUl += innUl; }
