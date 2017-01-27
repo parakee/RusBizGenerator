@@ -1,0 +1,126 @@
+{
+  "author" : "parakee",
+  "commands" : [
+    {
+      "script" : "rbg.cocoascript",
+      "handler" : "OrgName",
+      "shortcut" : "",
+      "name" : "Название организации",
+      "identifier" : "OrgName"
+    },
+    {
+      "script" : "rbg.cocoascript",
+      "handler" : "Money",
+      "shortcut" : "",
+      "name" : "Деньги",
+      "identifier" : "Money"
+    },
+    {
+      "script" : "rbg.cocoascript",
+      "handler" : "ByMask",
+      "shortcut" : "",
+      "name" : "По маске",
+      "identifier" : "ByMask"
+    },
+    {
+      "script" : "rbg.cocoascript",
+      "handler" : "dateDDMMYY",
+      "shortcut" : "",
+      "name" : "ДД.ММ.ГГГГ",
+      "identifier" : "dateDDMMYY"
+    },
+    {
+      "script" : "rbg.cocoascript",
+      "handler" : "dateDDmounth",
+      "shortcut" : "",
+      "name" : "ДД месяц",
+      "identifier" : "dateDDmounth"
+    },
+    {
+      "script" : "rbg.cocoascript",
+      "handler" : "dateDDmounthYear",
+      "shortcut" : "",
+      "name" : "ДД месяц ГГГГ",
+      "identifier" : "dateDDmounthYear"
+    },
+    {
+      "script" : "rbg.cocoascript",
+      "handler" : "twoWords",
+      "shortcut" : "",
+      "name" : "Из двух слов",
+      "identifier" : "twoWords"
+    },
+    {
+      "script" : "rbg.cocoascript",
+      "handler" : "threeWords",
+      "shortcut" : "",
+      "name" : "Из трех слов",
+      "identifier" : "threeWords"
+    },
+    {
+      "script" : "rbg.cocoascript",
+      "handler" : "innkpp",
+      "shortcut" : "",
+      "name" : "ИНН-КПП",
+      "identifier" : "innkpp"
+    },
+    {
+      "script" : "rbg.cocoascript",
+      "handler" : "inn",
+      "shortcut" : "",
+      "name" : "ИНН",
+      "identifier" : "inn"
+    },
+    {
+      "script" : "rbg.cocoascript",
+      "handler" : "kpp",
+      "shortcut" : "",
+      "name" : "КПП",
+      "identifier" : "kpp"
+    },
+    {
+      "script" : "rbg.cocoascript",
+      "handler" : "OtherNum",
+      "shortcut" : "",
+      "name" : "Другие номера",
+      "identifier" : "OtherNum"
+    }
+  ],
+  "menu": {
+    "title": "Бизнес-генератор",
+    "items": [
+      "OrgName",
+      "Money",
+      "ByMask",
+      {
+         "title": "Имена",
+         "items": [
+           "twoWords",
+           "threeWords"
+         ]
+       },
+       {
+         "title": "Даты",
+         "items": [
+           "dateDDmounth",
+           "dateDDmounthYear",
+           "dateDDMMYY"
+         ]
+       },
+       {
+         "title": "Номера",
+         "items": [
+           "inn",
+           "kpp",
+           "innkpp",
+           "OtherNum"
+         ]
+       },
+    ]
+  },
+  "identifier" : "com.sketch.rbg",
+  "version" : "1.1.0",
+  "description" : "Плагин для генерации бизнес-информации",
+  "authorEmail" : "ventrum@ya.ru",
+  "name" : "RusBizGenerator"
+}

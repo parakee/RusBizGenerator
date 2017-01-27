@@ -1,0 +1,361 @@
+@import 'names.js'
+var doc;
+var selection;
+
+function setLayerText(layer, text, name) {
+	[layer setStringValue:text];
+	[layer setName:name];
+	[layer adjustFrameToFit];
+}
+
+function fillLines(selection, lines) {
+	if ([selection count] == 1) {
+		setLayerText(selection[0], lines.join("\n"), lines[0]);
+	} else {
+		for (var j=0; j<lines.length; j++) {
+			setLayerText(selection[j], lines[j], lines[j]);
+		}
+	}
+}
+
+var OrgName = function (context) {
+	doc = context.document;
+	selection = context.selection;
+
+	var count = [selection count];
+	if (count == 1) { count = [doc askForUserInput:"Количество строк" initialValue:10]; }
+	var lines = new Array();
+
+	for (var i=0; i<count; i++) {
+		var r = Math.floor(Math.random() * namesOrg.length);
+		var name = namesOrg[r];
+		lines.push(name);
+	}
+
+	fillLines(selection, lines);
+
+}
+
+
+function Money(context) {
+	doc = context.document;
+	selection = context.selection;
+
+	var count = [selection count];
+	if (count == 1) { count = [doc askForUserInput:"Количество строк" initialValue:10]; }
+	var lines = new Array();
+
+	for (var i = 0, l = count; i < l; i++) {
+		var summa = "";
+		var pnol;
+		var znakov;
+		var maxZnak = 8;
+		summa += Math.floor(Math.random() * 9)+1;
+		znakov = Math.floor(Math.random() * (maxZnak-3))+3;
+
+		for (var j = 0; j < znakov; j++) {
+			var randomDigit = Math.floor(Math.random() * 10);
+			if (znakov-j == 3 || znakov-j == 6) {
+				summa += " ";
+				summa += randomDigit;
+			} else {
+				summa += randomDigit;
+			}	
+		}
+
+		summa += ",";
+
+		pnol = Math.floor(Math.random() * 20)+1;
+
+
+		if (pnol > 9 ) {
+			summa += "0";
+		} else {
+			summa += pnol;
+		}
+
+	    pnol = Math.floor(Math.random() * 20)+1;
+
+		if (pnol > 9 ) {
+			summa += "0";
+		} else {
+			summa += pnol;
+		}
+
+		lines.push(summa);
+	}
+	fillLines(selection, lines);
+}
+
+function ByMask(context) {
+doc = context.document;
+selection = context.selection;
+// Show dialog
+ var mask = [doc askForUserInput:'Введите маску (звездочки заменятся цифрами, остальное останется)' initialValue:'+7 9** ***-**-**'].toString();
+ var maskLength = mask.length();
+ var x = 0;
+ var avResult = "";
+ var resultNum = "";
+
+for (var i = 0, l = [selection count]; i < l; i++) {
+	var layer = selection[i];
+	var resultNum = ""; 
+
+	for (var j = 0; j < maskLength; j++) {
+		var sym = mask.charAt(j);
+		if (sym == "*") { sym = Math.floor(Math.random() * 10); }
+		resultNum += sym;
+	};
+
+	//resultNum = mask.length;
+	setLayerText(layer, resultNum, resultNum);
+	//[layer setStringValue: resultNum];
+	//[layer setName: resultNum];
+}	
+}
+
+function dateDDMMYY(context) {
+	doc = context.document;
+	selection = context.selection;
+
+	var count = [selection count];
+	if (count == 1) { count = [doc askForUserInput:"Количество строк" initialValue:10]; }
+	var lines = new Array();
+
+	var today = new Date();
+
+	for (var i = 0, l = count; i < l; i++) {
+		var rand = Math.floor(Math.random()*5);
+		today.setDate(today.getDate() - rand);
+		var month = today.getMonth()+1;
+		dayNum = today.getDate() + "." + (month<10 ? "0"+month : month) + "." + today.getFullYear();
+		lines.push(dayNum);
+	}
+
+	fillLines(selection, lines);	
+}
+
+function dateDDmounth(context) {
+	doc = context.document;
+	selection = context.selection;
+
+	var count = [selection count];
+	if (count == 1) { count = [doc askForUserInput:"Количество строк" initialValue:10]; }
+	var lines = new Array();
+
+	var namesMonth = ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
+	var today = new Date();
+
+	for (var i = 0, l = count; i < l; i++) {
+		var rand = Math.floor(Math.random()*5);
+		today.setDate(today.getDate() - rand);
+		dayNum = today.getDate() + " " + namesMonth[today.getMonth()];
+		lines.push(dayNum);
+	}
+
+	fillLines(selection, lines);	
+}
+
+function dateDDmounthYear(context) {
+	doc = context.document;
+	selection = context.selection;
+
+	var count = [selection count];
+	if (count == 1) { count = [doc askForUserInput:"Количество строк" initialValue:10]; }
+	var lines = new Array();
+
+	var namesMonth = ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
+	var today = new Date();
+
+	for (var i = 0, l = count; i < l; i++) {
+		var rand = Math.floor(Math.random()*5);
+		today.setDate(today.getDate() - rand);
+		var month = today.getMonth()+1;
+		dayNum = today.getDate() + " " + namesMonth[today.getMonth()] + " " + today.getFullYear();
+		lines.push(dayNum);
+	}
+
+	fillLines(selection, lines);	
+}
+
+function twoWords(context) {
+	doc = context.document;
+	selection = context.selection;
+
+	var count = [selection count];
+	if (count == 1) { count = [doc askForUserInput:"Количество строк" initialValue:10]; }
+	var lines = new Array();
+
+	for (var i = 0, l = count; i < l; i++) {
+		var randomGender = Math.floor(Math.random()+0.5);
+		var firstNames = namesParts[randomGender][1];
+		var lastNames = namesParts[randomGender][2];
+
+		var randomName = firstNames[ Math.floor(Math.random() * firstNames.length) ];
+			randomName += ' ' + lastNames[ Math.floor(Math.random() * lastNames.length) ];
+
+		lines.push(randomName);
+	}
+	fillLines(selection, lines);	
+}
+
+function threeWords(context) {
+	doc = context.document;
+	selection = context.selection;
+
+	var count = [selection count];
+	if (count == 1) { count = [doc askForUserInput:"Количество строк" initialValue:10]; }
+	var lines = new Array();
+
+	for (var i = 0, l = count; i < l; i++) {
+		var randomGender = Math.floor(Math.random()+0.5);
+		var firstNames = namesParts[randomGender][1];
+		var lastNames = namesParts[randomGender][2];
+		var secondNames = namesParts[randomGender][3]
+
+		var randomName = lastNames[ Math.floor(Math.random() * lastNames.length) ];
+			randomName += ' ' + firstNames[ Math.floor(Math.random() * firstNames.length) ];
+			randomName += ' ' + secondNames[ Math.floor(Math.random() * secondNames.length) ];
+
+		lines.push(randomName);
+	}
+	fillLines(selection, lines);	
+}
+
+function innkpp(context) {
+	doc = context.document;
+	selection = context.selection;
+
+	var count = [selection count];
+	if (count == 1) { count = [doc askForUserInput:"Количество строк" initialValue:10]; }
+	var lines = new Array();
+
+	for (var i = 0, l = count; i < l; i++) {
+		var innUl = "";
+		var kppUl = "";
+		var pairInnKpp = "";
+		innUl += Math.floor(Math.random() * 9)+1;
+
+		for (var j = 0; j < 9; j++) {
+			var randomDigit = Math.floor(Math.random() * 10);
+			innUl += randomDigit;
+			if (j == 2) { kppUl += innUl; }
+		}
+
+		kppUl += "01001";
+		pairInnKpp += innUl + " - " + kppUl;
+
+		lines.push(pairInnKpp);
+	}
+	fillLines(selection, lines);	
+}
+
+function inn(context) {
+	doc = context.document;
+	selection = context.selection;
+
+	var count = [selection count];
+	if (count == 1) { count = [doc askForUserInput:"Количество строк" initialValue:10]; }
+	var lines = new Array();
+
+	for (var i = 0, l = count; i < l; i++) {
+		var innFl = "";
+		innFl += Math.floor(Math.random() * 9)+1;
+
+		for (var j = 0; j < 9; j++) {
+			var randomDigit = Math.floor(Math.random() * 10);
+			innFl += randomDigit;
+		}
+
+		lines.push(innFl);
+	}
+	fillLines(selection, lines);	
+}
+
+function kpp(context) {
+	doc = context.document;
+	selection = context.selection;
+
+	var count = [selection count];
+	if (count == 1) { count = [doc askForUserInput:"Количество строк" initialValue:10]; }
+	var lines = new Array();
+
+	for (var i = 0, l = count; i < l; i++) {
+		var resultNum = "";
+		resultNum += Math.floor(Math.random() * 9)+1;
+
+		for (var j = 0; j < 8; j++) {
+			if (j == 4) { resultNum += "01001"; j = 8;} // если это КПП, добавляем 01001 и заканчиваем
+			else {
+				var randomDigit = Math.floor(Math.random() * 10);
+				resultNum += randomDigit;
+			}
+		}
+
+		lines.push(resultNum);
+	}
+	fillLines(selection, lines);	
+}
+
+function OtherNum(context) {
+	doc = context.document;
+	selection = context.selection;
+
+	var count = [selection count];
+	if (count == 1) { count = [doc askForUserInput:"Количество строк" initialValue:10]; }
+	var lines = new Array();
+
+	// Show dialog
+	 var basename = [doc askForUserInput:'Введите число цифр или имя. Например: ИННФЛ' initialValue:'Число цифр или аббревиатура'].toString();
+	 var x = 0;
+	 var avResult = "";
+	 var resultNum = "";
+	 var flagContent;
+	 
+	var huj = parseInt(basename);
+	if (!isNaN(huj)) {
+		x = basename; 
+	} else { //Если введено не число
+
+		if ((basename == "ИНН") || (basename == "инн")) { x = 10; } else
+		if ((basename == "ИННФЛ") || (basename == "иннфл")) { x = 12; } else
+		if ((basename == "КПП") || (basename == "кпп")) { x = 9; flagContent = 1; } else
+		if ((basename == "ОГРН") || (basename == "огрн")) { x = 13; } else
+		if ((basename == "ОГРНИП") || (basename == "огрнип")) { x = 15; } else
+		if ((basename == "ОКАТО") || (basename == "окато")) { x = 11; } else
+		if ((basename == "ОКТМО") || (basename == "октмо")) { x = 11; } else
+		if ((basename == "ОКПО") || (basename == "окпо")) { x = 10; flagContent = 0; } else
+		if ((basename == "РС") || (basename == "рс") || (basename == "р/с") || (basename == "Р/С")) { x = 20; } else
+		if ((basename == "БИК") || (basename == "бик")) { x = 9; flagContent = 0; } else
+		if ((basename == "КС") || (basename == "кс") || (basename == "к/с") || (basename == "К/С")) { x = 20; } 
+		else { x = 0; } 
+
+	}
+
+	for (var i = 0, l = count; i < l; i++) {
+		var resultNum = ""; 
+
+		if (flagContent == 0) {  // Правило для БИК и ОКПО, они начинаются с 0
+			resultNum += 0;
+		} else {
+			resultNum += Math.floor(Math.random() * 9) + 1;  // остальные начинаются не с 0
+		}
+
+
+
+		for (var j = 0; j < (x - 1); j++) {
+			if (flagContent == 1 && j == 4) { resultNum += "01001"; j = x - 1;} // если это КПП, добавляем 01001 и заканчиваем
+			else {
+				var randomDigit = Math.floor(Math.random() * 10);
+				resultNum += randomDigit;
+			}
+
+		}
+
+		if (x == 0) { resultNum = "Хотелось_бы_число"; } 
+		if (x < 0) { resultNum = avResult; } 
+
+		lines.push(resultNum);
+	}
+	fillLines(selection, lines);	
+}
